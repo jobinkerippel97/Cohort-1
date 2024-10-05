@@ -40,7 +40,7 @@ const RestuarantSchema = new mongoose.Schema({
     type: String,
     enum: [1,2,3,4,5],
     default: 0
-  },  },
+  },
    role: {
    type: String,
    enum: ['Restuarant', 'admin'],
@@ -53,8 +53,7 @@ const RestuarantSchema = new mongoose.Schema({
    orders : [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Order'
-   }]
-   
+   }],module
   },
 {timestamps:true}
 );

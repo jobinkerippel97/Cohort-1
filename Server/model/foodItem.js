@@ -29,27 +29,22 @@ const FooditemsSchema = new mongoose.Schema({
       required: true,
 
    }],
-   quandity: {
-    type: Number,
-    required: true,
-    default: '1',
-    enum: [1,2,3,4,5]
-   },
+  
    rating: {
     type: String,
     enum: [1,2,3,4,5],
     default: 0,
     users: [{
       type: mongoose.Schema.Types.ObjectId,
-    ref: 'User' 
+    ref: 'User', 
+    required: true
     }],
 
     restuarants: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Restuarant',
       required: true
-    }]
-   
+    }],
 
    }
   },
