@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 router.get('/allRestuarants', )
-router.get('/profile',)
+router.get('/restuarant/:Id',)
 
-router.post('/signup',)
-router.post('/login',)
-router.post('logout',)
+router.post('/addRestuarant',)
+
 
 router.patch('update-Restuarant',)
 router.delete('delete-Restuarant')

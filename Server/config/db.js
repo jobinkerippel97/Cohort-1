@@ -6,7 +6,8 @@ const connectDB = async ()=>{
         console.log("DB Connected Successfully")
 
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        res.status(500).json(error)
     }
 }
 

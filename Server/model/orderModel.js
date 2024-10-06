@@ -12,9 +12,9 @@ const OrderSchema = new Mongoose.Schema({
     ref: 'User',
     required: true
   }],
-  restuarants:[{
+  sellers:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Restuarant',
+    ref: 'Seller',
     required: true
   }],
   quantity: {

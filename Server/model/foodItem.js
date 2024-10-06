@@ -24,11 +24,6 @@ const FooditemsSchema = new mongoose.Schema({
     required: true,
     default: 'South Indian'
    }],
-   category: [{
-      type: String,
-      required: true,
-
-   }],
   
    rating: {
     type: String,
@@ -45,6 +40,11 @@ const FooditemsSchema = new mongoose.Schema({
       ref: 'Restuarant',
       required: true
     }],
+    category: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category',
+      required: true
+    }]
 
    }
   },

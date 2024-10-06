@@ -8,9 +8,9 @@ const MenuSchema = new Mongoose.Schema({
     required: true
    }],
 
-   Restuarants: [{
+   sellers: [{
      type: mongoose.Schema.Types.ObjectId,
-    ref: 'Restuarant',
+    ref: 'Seller',
     required: true
    }]
     

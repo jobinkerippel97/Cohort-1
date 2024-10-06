@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const UserSchema = new Mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -19,7 +19,8 @@ const UserSchema = new Mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 6
+        minLength: 6,
+        trim: true
 
     },
 
@@ -32,6 +33,10 @@ const UserSchema = new Mongoose.Schema({
         type: String,
         default: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4YreOWfDX3kK-QLAbAL4ufCPc84ol2MA8Xg&s'
     },
+    fooditems: [{
+         type: mongoose.Schema.Types.ObjectId,
+         ref: 'Fooditem'
+    }]
 
   },
 

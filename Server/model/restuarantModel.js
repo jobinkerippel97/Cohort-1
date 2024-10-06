@@ -1,63 +1,36 @@
 const mongoose = require('mongoose');
 
-const RestuarantSchema = new mongoose.Schema({
-    name: {
-      type: String,
-      required: true
-    },
 
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      minLength: 6,
-      maxLength: 20
-    },
-    password: {
-      type: String,
-      required: true,
-      minLength: 8
-    },
-    phone: {
-      type: String,
-      required:true
-    },
-   restaurantName: {
+const CartSchema = new Mongoose.Schema({
+  thumbnail: {
+    type: String,
+    default: 'https://img.freepik.com/free-vector/hand-drawn-fast-food-frame_23-2147862451.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721779200&semt=ais_user'
+  },
+   restuarantName: {
     type: String,
     required: true
    },
-   restaurantAdress: {
+   restuarantAdress: {
     type: String,
-    required: true,
-    minLength: 10,
+    required: true
    },
    cuisine: [{
     type: String,
     required: true,
     default: 'South Indian'
+
    }],
-  rating: {
+   rating: {
     type: String,
     enum: [1,2,3,4,5],
     default: 0
   },
-   role: {
-   type: String,
-   enum: ['Restuarant', 'admin'],
-   default: 'Restuarant'
-   },
-   fooditems : [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Fooditem'
-   }],
-   orders : [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Order'
-   }],module
+    
   },
-{timestamps:true}
+
+  {timestamps: true}
 );
 
-const Restuarant = mongoose.model('Restuarant', RestuarantSchema);
+const Cart = mongoose.model('Cart', CartSchema);
 
-module.exports = { Restuarant }
+module.exports = { Cart }

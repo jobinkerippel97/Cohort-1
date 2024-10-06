@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 
 
-const MenuSchema = new Mongoose.Schema({
-  category: {
+const CategorySchema = new Mongoose.Schema({
+  category: [{
     type: String,
-    required: true
-  }
+    required: true,
+    default: 'stater'
+  }]
     
   },
 
   {timestamps: true}
 );
 
-const Menu = mongoose.model('Menu', MenuSchema);
+const Category = mongoose.model('Category', CategorySchema);
 
-module.exports = { Menu }
+module.exports = { Category }
