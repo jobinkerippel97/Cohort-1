@@ -43,8 +43,13 @@ const OrderSchema = new Mongoose.Schema({
     enum: ['Accepted', 'Pending', 'Preparing', 'Redy to Pickup', 'Out for Delivery', 'Delivered','Cancelled'],
     default: "Pending",
     required: true
-  }
+  },
     
+  },
+  OrderSchema.methods.calculateTotalprice = function() {
+this.total = this.foods.reduce((total, food) => {
+  return total + (food.price * food.quantity); //miltiply price by quandity
+}, 0)
   },
 
   {timestamps: true}

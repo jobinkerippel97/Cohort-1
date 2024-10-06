@@ -1,14 +1,14 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/allUsers', )
+router.get('/allRestuarants', )
 router.get('/profile',)
 
 router.post('/signup',)
 router.post('/login',)
 router.post('logout',)
 
-router.patch('update-User',)
-router.delete('delete-User')
+router.patch('update-Restuarant',)
+router.delete('delete-Restuarant')
 
-module.exports = { userRoutes: router }
+module.exports = { restuarantRoutes: router }
