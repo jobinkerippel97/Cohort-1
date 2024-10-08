@@ -25,6 +25,12 @@ const CartSchema = new Mongoose.Schema({
     enum: [1,2,3,4,5],
     default: 0
   },
+
+  sellers:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Seller',
+    required: true
+  }],
     
   },
 
