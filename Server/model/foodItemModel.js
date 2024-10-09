@@ -1,7 +1,7 @@
 const mongoose  = require("mongoose");
 
 
-const FooditemsSchema = new mongoose.Schema({
+const FooditemSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -19,11 +19,11 @@ const FooditemsSchema = new mongoose.Schema({
     type: Number,
     required: true 
    },
-   cuisine: [{
+   cuisine: {
     type: String,
     required: true,
     default: 'South Indian'
-   }],
+   },
   
    rating: {
     type: String,

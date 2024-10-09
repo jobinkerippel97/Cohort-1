@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const CartSchema = new Mongoose.Schema({
+const RestuarantSchema = new mongoose.Schema({
   thumbnail: {
     type: String,
     default: 'https://img.freepik.com/free-vector/hand-drawn-fast-food-frame_23-2147862451.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1721779200&semt=ais_user'
@@ -31,12 +31,17 @@ const CartSchema = new Mongoose.Schema({
     ref: 'Seller',
     required: true
   }],
+  categories:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true
+  }],
     
   },
 
   {timestamps: true}
 );
 
-const Cart = mongoose.model('Cart', CartSchema);
+const Restuarant = mongoose.model('Restuarant', RestuarantSchema);
 
-module.exports = { Cart }
+module.exports = { Restuarant }
