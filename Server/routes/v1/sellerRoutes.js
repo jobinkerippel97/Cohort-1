@@ -12,8 +12,9 @@ router.post('/login', sellerLogin)
 router.post('/logout', sellerLogout)
 
 router.patch('/update-Seller',sellerAuth, sellerUpdate)
-router.delete('/delete-Seller', deleteSeller )
+router.delete('/delete-Seller/:sellerId', deleteSeller )
 
 router.get('/check-seller', sellerAuth, checkSeller)
 
+// router.get('/some-end-point', adminAuth, handleSomthing)
 module.exports = { sellerRoutes: router }

@@ -2,7 +2,7 @@ const { Restuarant } = require("../model/restuarantModel")
 
 const createRestuarant = async (req,res,next) => {
     try {
-        const{restuarantName,restuarantAdress,cuisine,rating,profilePic,sellers, categories} = req.body
+        const{restuarantName,restuarantAdress,cuisine,rating,profilePic,Restuarantss, categories} = req.body
         if( !restuarantName || !restuarantAdress || !cuisine ){
            return res.status(400).json({success: false, message: "All fields is required"}) }
 
@@ -41,7 +41,7 @@ const getRestuarant = async (req,res,next) => {
        if(!restuarant){
         return res.status(400).json({success: false, message: "restuarant is not fetched properly"})
        }
-       res.json({success: true, message: "seller profile fetch successfully", data: restuarant})
+       res.json({success: true, message: "Restuarants profile fetch successfully", data: restuarant})
         
     } catch (error) {
         console.log(error)
@@ -50,14 +50,22 @@ const getRestuarant = async (req,res,next) => {
 }
 const updateRestuarant = async (req,res,next) => {
     try {
-    //   update is not working properly
-       const restuarantUpdate = await Restuarant.findByIdAndUpdate(req.params.RestuarantId, req.body, {new: true})
-       console.log(restuarantUpdate)
 
-       if(!restuarantUpdate){
-       return res.status(400).json({success: false, message: "resturant is not updated properly"})
-}
-       res.json({success: true, message: "Restuarant updated successfully", data: restuarantUpdate})
+        const {restuarantId}= req.params;
+        const {restuarantName,restuarantAdress,cuisine,rating,profilePic,Restuarantss, categories} = req.body;
+
+
+        const isrestuarantExist = await Restuarant.findOne({_id: restuarantId})
+        if(!isrestuarantExist){
+            return res.status(400).json({success: false, message: "Restuarants does not exist"})
+        }
+       
+
+      const updatedRestuarant = await Restuarant.findOneAndUpdate ({_id: restuarantId}, {restuarantName,restuarantAdress,cuisine,rating,profilePic,restuarants, categories}, {new: true}) 
+        
+
+        res.json({success: true, message: "Restuarants updated sucessfully", data:updatedRestuarant})
+        
         
     } catch (error) {
         console.log(error)
@@ -66,10 +74,14 @@ const updateRestuarant = async (req,res,next) => {
 }
 const deleteRestuarant = async (req,res,next) => {
     try {
-       const restuarantId = req.params.id
-       const deleteRestuarant = await Restuarant.findOneAndDelete(restuarantId)
+       const {restuarantId} = req.params;
+       
+       const deletedRestuarant = await Restuarant.findOneAndDelete({_id: restuarantId})
+       if(!deletedRestuarant){
+        res.json({success: false, message: "restuarant already deleted"})
+       }
 
-       res.json({success: true, message: "Restuarant deleted successfully", data: deleteRestuarant})
+       res.json({success: true, message: "restuarant deleted successfully", data: deletedRestuarant})
         
     } catch (error) {
         console.log(error)

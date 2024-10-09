@@ -11,7 +11,7 @@ router.post('/signup', userSignup)
 router.post('/login', userLogin)
 router.post('/logout', userLogout)
 
-router.patch('/update-user', userAuth, userUpdate)
+router.patch('/update-user/:userId', userAuth, userUpdate)
 router.delete('/delete-user', userAuth, deleteUser)
 
 router.get('/check-user',userAuth, checkUser)

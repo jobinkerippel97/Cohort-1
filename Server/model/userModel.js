@@ -28,6 +28,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    address: {
+        houseNo: String,
+        street: String,
+        pinCode: String,
+        state: String
+    },
 
     profilePic: {
         type: String,

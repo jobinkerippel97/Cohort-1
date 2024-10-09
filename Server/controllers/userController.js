@@ -4,7 +4,7 @@ const { generateToken } = require("../utils/token");
 
 const userSignup = async (req,res,next) => {
     try {
-        const {name,email, password, phone, profilePic} = req.body;
+        const {name,email, password, phone, profilePic,address} = req.body;
 
         if(!name || !email || !password ) {
          return res.status(400).json({success: false, message: "all fields is required"})
@@ -19,7 +19,7 @@ const userSignup = async (req,res,next) => {
         const hashedPassword = bcrypt.hashSync(password, saltRounds);
         // console.log(hashedPassword, '====hashedPassword')
 
-        const newUser = new User({name, email, password: hashedPassword, phone, profilePic})
+        const newUser = new User({name, email, password: hashedPassword, phone, profilePic,address})
         await newUser.save();
 
         const token = generateToken(newUser._id, 'user')
@@ -134,12 +134,22 @@ const getAllUsers = async (req,res,next) =>{
 
 const userUpdate = async (req,res,next) => {
     try {
-       const user = req.user 
-       
-       
-       const updateUser = await User.findByIdAndUpdate({_id: user.id})
 
-       res.json({success: true, message: "User profile updated successfully", data: updateUser})
+        const {userId} = req.params
+        const {name,email, password, phone, profilePic,address} = req.body;
+
+
+        const isuserExist = await User.findOne({_id: userId})
+        if(!isuserExist){
+            return res.status(400).json({success: false, message: "user does exist"})
+        }
+       
+
+      const updatedUser = await User.findOneAndUpdate( {_id: userId} , {name,email, password, phone, profilePic,address}, {new: true})
+        
+
+        res.json({success: true, message: "User updated sucessfully", data: updatedUser})
+        
         
     } catch (error) {
         console.log(error)
@@ -149,11 +159,14 @@ const userUpdate = async (req,res,next) => {
 
 const deleteUser = async (req,res,next) => {
     try {
-       const user = req.user 
+       const {userId} = req.params;
        
-       const deleteUser = await User.findOneAndDelete({_id: user.id})
+       const deletedUser = await User.findOneAndDelete({_id: userId})
+       if(!deletedUser){
+        res.json({success: false, message: "user already deleted"})
+       }
 
-       res.json({success: true, message: "User profile deleted successfully", data: deleteUser})
+       res.json({success: true, message: "User profile deleted successfully", data: deletedUser})
         
     } catch (error) {
         console.log(error)

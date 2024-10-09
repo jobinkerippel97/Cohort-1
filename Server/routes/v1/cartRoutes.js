@@ -4,7 +4,7 @@ const router = express.Router()
 router.get('/allCarts', )
 router.get('/cart/:Id',)
 
-router.post('/addCart',)
+router.post('/add-to-Cart',)
 
 
 router.patch('update-Cart',)

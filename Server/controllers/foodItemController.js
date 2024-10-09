@@ -59,14 +59,22 @@ const getFooditem = async (req,res,next) => {
 }
 const updateFooditem = async (req,res,next) => {
     try {
-    //   update is not working properly
-       const fooditemUpdate = await Fooditem.findByIdAndUpdate(req.params.FooditemId, req.body, {new: true})
-       console.log(fooditemUpdate)
 
-       if(!fooditemUpdate){
-       return res.status(400).json({success: false, message: "fooditem is not updated properly"})
-}
-       res.json({success: true, message: "Fooditem updated successfully", data: fooditemUpdate})
+        const {fooditemId}= req.params;
+        const {title, thumbnail, description, price, cuisine,  rating} = req.body;
+
+
+        const isFooditemExist = await Fooditem.findOne({_id: fooditemId})
+        if(!isFooditemExist){
+            return res.status(400).json({success: false, message: "Fooditems does not exist"})
+        }
+       
+
+      const updatedFooditem = await Fooditem.findOneAndUpdate ({_id: fooditemId}, {title, thumbnail, description, price, cuisine, rating}, {new: true}) 
+        
+
+        res.json({success: true, message: "Fooditems updated sucessfully", data: updatedFooditem})
+        
         
     } catch (error) {
         console.log(error)
@@ -75,10 +83,14 @@ const updateFooditem = async (req,res,next) => {
 }
 const deleteFooditem = async (req,res,next) => {
     try {
-       const fooditemId = req.params.id
-       const deleteFooditem = await Fooditem.findOneAndDelete(fooditemId)
+       const {fooditemId} = req.params;
+       
+       const deletedFooditem = await Fooditem.findOneAndDelete({_id: fooditemId})
+       if(!deletedFooditem){
+        res.json({success: false, message: "fooditem already deleted"})
+       }
 
-       res.json({success: true, message: "Fooditem deleted successfully", data: deleteFooditem})
+       res.json({success: true, message: "fooditem deleted successfully", data: deletedFooditem})
         
     } catch (error) {
         console.log(error)

@@ -90,7 +90,7 @@ const sellerLogout = async (req,res,next) => {
 }
 const sellerProfile = async (req,res,next) => {
     try {
-       const seller = req.seller // fetched the verifiedToken value from userAuth//
+       const seller = req.seller // fetched the verifiedToken value from sellerAuth//
        console.log('======seller verified', seller)
 
     //const {id}= req.params// this is not needed when the id is passing with token//
@@ -133,12 +133,22 @@ const getAllSellers = async (req,res,next) =>{
 }
 const sellerUpdate = async (req,res,next) => {
     try {
-       const seller = req.seller
-       
-       
-       const updateSeller = await Seller.findByIdAndUpdate({_id: seller.id})
 
-       res.json({success: true, message: "Seller profile updated successfully", data: updateSeller})
+        const {sellerId}= req.params;
+        const {name,email, password, phone, profilePic,foodItems, orders, menus} = req.body;
+
+
+        const issellerExist = await Seller.findOne({_id: sellerId})
+        if(!issellerExist){
+            return res.status(400).json({success: false, message: "seller does not exist"})
+        }
+       
+
+      const updatedSeller = await Seller.findOneAndUpdate ({_id: sellerId}, {name,email, password, phone, profilePic,foodItems, orders, menus}, {new: true}) 
+        
+
+        res.json({success: true, message: "Seller updated sucessfully", data: updatedSeller})
+        
         
     } catch (error) {
         console.log(error)
@@ -147,11 +157,14 @@ const sellerUpdate = async (req,res,next) => {
 }
 const deleteSeller = async (req,res,next) => {
     try {
-       const seller = req.seller 
+       const {sellerId} = req.params;
        
-       const deleteSeller = await Seller.findOneAndDelete({_id: seller.id})
+       const deletedSeller = await Seller.findOneAndDelete({_id: sellerId})
+       if(!deletedSeller){
+        res.json({success: false, message: "seller already deleted"})
+       }
 
-       res.json({success: true, message: "Seller profile deleted successfully", data: deleteSeller})
+       res.json({success: true, message: "seller profile deleted successfully", data: deletedSeller})
         
     } catch (error) {
         console.log(error)
