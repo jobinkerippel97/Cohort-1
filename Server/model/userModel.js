@@ -29,10 +29,23 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     address: {
-        houseNo: String,
-        street: String,
-        pinCode: String,
-        state: String
+        houseNo:{ 
+            type: String,
+            required: true
+        },
+        street: {
+            type: String,
+            required: true
+        },
+       pincode: {
+        type: String,
+        required: true
+       },
+        state: {
+            type: String,
+            required: true
+        },
+        
     },
 
     profilePic: {
