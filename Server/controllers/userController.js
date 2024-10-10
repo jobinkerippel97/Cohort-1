@@ -31,7 +31,6 @@ const userSignup = async (req,res,next) => {
 
         res.json({success: true, message: "User created sucessfully"})
         
-        res.status(400).json({message: "somting went wrong"})
     } catch (error) {
         console.log(error)
         res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
