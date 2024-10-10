@@ -22,8 +22,7 @@ const OrderSchema = new Mongoose.Schema({
     ref: 'Restuarant',
     required: true
    }
-  }],res
-  
+  }], 
    paymentStatus: {
     type: String,
     required: true,
