@@ -20,8 +20,7 @@ const CartSchema = new Mongoose.Schema({
         required: true,
 
        },
-       quantity: {
-        type: Number,
+       quantity: {       type: Number,
         required: true,
         default: 1,
         enum: [1,2,3,4,5]
@@ -36,8 +35,7 @@ const CartSchema = new Mongoose.Schema({
   },
 
   {timestamps: true}
-);
-CartSchema.methods.calculateTotalPrice = function() {
+);artSchema.methods.calculateTotalPrice = function() {
   this.totalPrice = this.fooditems.reduce((total, Foofitem) => total + Fooditem.price * Fooditem.quantity,0)
 
   

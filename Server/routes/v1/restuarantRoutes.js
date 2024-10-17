@@ -4,13 +4,13 @@ const { sellerAuth } = require('../../middlewares/sellerAuth')
 
 const router = express.Router()
 
-router.get('/allRestuarants', getAllRestuarants)
-router.get('/restuarant/:Id', getRestuarant)
+router.get('/all-restuarants', getAllRestuarants)
+router.get('/restuarant/:restuarantId', getRestuarant)
 
-router.post('/addRestuarant', createRestuarant)
+router.post('/add-restuarant', createRestuarant)
 
 
-router.patch('/update-Restuarant/:restuarantId', sellerAuth, updateRestuarant)
-router.delete('/delete-Restuarant',sellerAuth, deleteRestuarant)
+router.patch('/update-restuarant/:restuarantId', sellerAuth, updateRestuarant)
+router.delete('/delete-restuarant/:restuarantId',sellerAuth, deleteRestuarant)
 
 module.exports = { restuarantRoutes: router }

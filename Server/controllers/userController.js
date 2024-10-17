@@ -32,8 +32,8 @@ const userSignup = async (req,res,next) => {
         res.json({success: true, message: "User created sucessfully"})
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -68,8 +68,8 @@ const userLogin = async (req,res,next) => {
         
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -80,8 +80,8 @@ const userLogout = async (req,res,next) => {
       
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -95,8 +95,8 @@ const userProfile = async (req,res,next) => {
        res.json({success: true, message: "User profile fetch successfully", data: userData})
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -110,8 +110,8 @@ const checkUser = async (req,res,next) => {
        res.json({success: true, message: "User authorized"})
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -126,8 +126,8 @@ const getAllUsers = async (req,res,next) =>{
         res.json({success: true, message: "users fetched successfully",data: users})
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -151,8 +151,8 @@ const userUpdate = async (req,res,next) => {
         
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       console.log(error) 
+       next(error);
     }
 }
 
@@ -168,8 +168,7 @@ const deleteUser = async (req,res,next) => {
        res.json({success: true, message: "User profile deleted successfully", data: deletedUser})
         
     } catch (error) {
-        console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+       next(error);
     }
 }
 

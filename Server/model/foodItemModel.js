@@ -28,26 +28,22 @@ const FooditemSchema = new mongoose.Schema({
    rating: {
     type: String,
     enum: [1,2,3,4,5],
-    default: 0,
-    users: [{
-      type: mongoose.Schema.Types.ObjectId,
-    ref: 'User', 
-    required: true
-    }],
+    default: 0},
 
-    restuarants: [{
+    users : [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Restuarant',
-      required: true
-    }],
-    category: [{
+      ref: 'User'
+     }],
+     restuarants : [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category',
-      required: true
-    }]
+      ref: 'Restuarant'
+     }],
+     categoris : [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category'
+     }],
 
-   }
-  },
+   },
 {timestamps:true}
 );
 

@@ -10,7 +10,11 @@ try {
     }
 
     const tokenVerified = jwt.verify(token, process.env.JWT_SECRET_KEY);
+if(!tokenVerified){
+    return res.status(401).json({success: false, message: "User not Authorized"})
+}
     if(tokenVerified.role !== "seller" && tokenVerified.role !== "admin"){
+
         return res.status(401).json({success: false, message: "Seller not authorized"})
     }
 

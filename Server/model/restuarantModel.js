@@ -27,11 +27,16 @@ const RestuarantSchema = new mongoose.Schema({
     enum: [1,2,3,4,5],
     default: 0
   },
+  menus:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Menu',
+    required: true
+  }],
 
   sellers:[{
-    type: mongoose.Schema.Types.ObjectId,
+   sellerId:{ type: mongoose.Schema.Types.ObjectId,
     ref: 'Seller',
-    required: true
+    required: true}
   }],
   categories:[{
     type: mongoose.Schema.Types.ObjectId,

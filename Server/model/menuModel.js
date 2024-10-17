@@ -3,15 +3,16 @@ const mongoose = require('mongoose');
 
 const MenuSchema = new Mongoose.Schema({
    fooditems: [{
-     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Fooditem',
-    required: true
-   }],
+    fooditemId:{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Seller',
+      required: true
+    }  }],
 
    sellers: [{
-     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Seller',
-    required: true
+    sellerId:{ type: mongoose.Schema.Types.ObjectId,
+      ref: 'Seller',
+      required: true}
    }]
     
   },

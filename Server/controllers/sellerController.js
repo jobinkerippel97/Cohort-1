@@ -38,7 +38,7 @@ const sellerSignup = async (req,res,next) => {
         res.status(400).json({message: "somting went wrong"})
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const sellerLogin = async (req,res,next) => {
@@ -73,7 +73,7 @@ const sellerLogin = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 
@@ -85,7 +85,7 @@ const sellerLogout = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const sellerProfile = async (req,res,next) => {
@@ -99,7 +99,7 @@ const sellerProfile = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const checkSeller = async (req,res,next) => {
@@ -113,7 +113,7 @@ const checkSeller = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const getAllSellers = async (req,res,next) =>{
@@ -128,7 +128,7 @@ const getAllSellers = async (req,res,next) =>{
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const sellerUpdate = async (req,res,next) => {
@@ -152,7 +152,7 @@ const sellerUpdate = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 const deleteSeller = async (req,res,next) => {
@@ -168,7 +168,7 @@ const deleteSeller = async (req,res,next) => {
         
     } catch (error) {
         console.log(error)
-        res.status(error.statusCode || 500).json({message: error.message || "Internal server error"})
+        next(error);
     }
 }
 
