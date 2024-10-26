@@ -11,17 +11,12 @@ const RestuarantSchema = new mongoose.Schema({
     required: true
    },
    address: {
-    buildingname: { type: String, required: true },
-    street: { type: String, required: true },
-    pincode: { type: String, required: true },
-    state: { type: String, required: true }
+    street: String,
+    city: String,
+    postalcode: String,
+    country: String
   },
-   cuisine: [{
-    type: String,
-    required: true,
-    default: 'South Indian'
-
-   }],
+   
    rating: {
     type: String,
     enum: [1,2,3,4,5],
@@ -38,9 +33,9 @@ const RestuarantSchema = new mongoose.Schema({
     ref: 'Seller',
     required: true}
   }],
-  categories:[{
+  cuisines:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+    ref: 'Cuisine',
     required: true
   }],
     

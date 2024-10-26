@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 
 
-const MenuSchema = new Mongoose.Schema({
+const MenuSchema = new mongoose.Schema({
+  
    fooditems: [{
-    fooditemId:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Seller',
+      ref: 'Fooditem',
       required: true
-    }  }],
-
-   sellers: [{
-    sellerId:{ type: mongoose.Schema.Types.ObjectId,
-      ref: 'Seller',
-      required: true}
-   }]
+      }],
+      restuarants: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Restuarant',
+        required: true
+        }],
     
   },
 

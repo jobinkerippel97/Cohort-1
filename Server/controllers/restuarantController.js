@@ -1,17 +1,25 @@
 const { Restuarant } = require("../model/restuarantModel")
+const { handleImageUpload } = require("../utils/imageUpload")
+const { Seller } = require("../model/sellerModel")
 
 const createRestuarant = async (req,res,next) => {
-    try {
-        const{thumbnail,restuarantName,restuarantAdress,cuisine,rating,profilePic,categories, menus, fooditems} = req.body
-        if( !restuarantName || !restuarantAdress || !cuisine ){
+    try { 
+        let imageUrl;
+        const{thumbnail,restuarantName,address,rating,cuisines, menus, sellers} = req.body
+        if( !restuarantName || !address ){
            return res.status(400).json({success: false, message: "All fields is required"}) }
 
-            const restuarantExist = await Restuarant.findOne({restuarantAdress})
+            const restuarantExist = await Restuarant.findOne({restuarantName})
             if(restuarantExist){
                 res.status(400).json({success: false, message: "Restuarant is already exist"})
             }
   
-            const newRestuarant = new Restuarant({thumbnail,restuarantName,restuarantAdress,cuisine,rating,profilePic});
+            if(req.file){
+                imageUrl = await handleImageUpload (req.file.path) // image is come with req.file.path
+              
+               }  
+
+            const newRestuarant = new Restuarant({thumbnail,restuarantName,address,cuisines,rating,menus,sellers});
 
         await newRestuarant.save();
         res.json({success: true, message: "Restuarant created successfully!",  data: newRestuarant})
@@ -51,18 +59,22 @@ const getRestuarant = async (req,res,next) => {
 }
 const updateRestuarant = async (req,res,next) => {
     try {
-
+   const seller = req.seller.id
         const {restuarantId}= req.params;
-        const {restuarantName,restuarantAdress,cuisine,rating,profilePic, categories} = req.body;
+        const {restuarantName,address,cuisines,rating,thumbnail, sellers,menus} = req.body;
 
 
         const isrestuarantExist = await Restuarant.findOne({_id: restuarantId})
         if(!isrestuarantExist){
             return res.status(400).json({success: false, message: "Restuarants does not exist"})
         }
+        const sellerExist = await Seller.findOne({_id:seller})
+        if(!sellerExist){
+            return res.status(400).json({message: "seller not found"})
+        }
        
 
-      const updatedRestuarant = await Restuarant.findOneAndUpdate ({_id: restuarantId}, {restuarantName,restuarantAdress,cuisine,rating,profilePic,categories}, {new: true,upsert: true}) //upsert: true for create a new course ia the course is not existing
+      const updatedRestuarant = await Restuarant.findOneAndUpdate ({_id: restuarantId}, {restuarantName,address,rating,thumbnail},{$push:{cuisines:{cusineId}}},{$push:{menus:{menuId}}},{$push:{sellers:{sellerId}}},{new: true,upsert: true}) //upsert: true for create a new course if the course is not existing
         
 
         res.json({success: true, message: "Restuarants updated sucessfully", data:updatedRestuarant})
@@ -76,11 +88,16 @@ const updateRestuarant = async (req,res,next) => {
 const deleteRestuarant = async (req,res,next) => {
     try {
        const {restuarantId} = req.params;
-       
+       const seller = req.seller.id
        const deletedRestuarant = await Restuarant.findOneAndDelete({_id: restuarantId})
        if(!deletedRestuarant){
         res.json({success: false, message: "restuarant already deleted"})
        }
+       const sellerExist = await Seller.findOne({_id:seller})
+       if(!sellerExist){
+           return res.status(400).json({message: "seller not found"})
+       }
+      
 
        res.json({success: true, message: "restuarant deleted successfully", data: deletedRestuarant})
         

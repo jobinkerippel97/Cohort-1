@@ -7,7 +7,8 @@ const { cartRoutes } = require('./cartRoutes')
 const { sellerRoutes } = require('./sellerRoutes')
 const { menuRoutes } = require('./menuRoutes')
 const { restuarantRoutes } = require('./restuarantRoutes')
-const { categoryRoutes } = require('./categoryRoutes')
+const {cuisineRoutes} = require('./cuisineRoutes')
+
 
 
 
@@ -27,7 +28,7 @@ v1Routes.use('/menus',menuRoutes)
 
 v1Routes.use('/restuarants', restuarantRoutes)
 
-v1Routes.use('/categorys', categoryRoutes)
+v1Routes.use('/cuisines',cuisineRoutes)
 
 
 

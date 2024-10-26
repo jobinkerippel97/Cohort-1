@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Fooditem } = require('./foodItemModel');
 
 
-const CartSchema = new Mongoose.Schema({
+const CartSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -10,6 +10,8 @@ const CartSchema = new Mongoose.Schema({
       },
 
       fooditems: [{
+
+        
        fooditemId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Fooditem',
@@ -20,7 +22,8 @@ const CartSchema = new Mongoose.Schema({
         required: true,
 
        },
-       quantity: {       type: Number,
+       quantity: {       
+        type: Number,
         required: true,
         default: 1,
         enum: [1,2,3,4,5]
@@ -35,12 +38,12 @@ const CartSchema = new Mongoose.Schema({
   },
 
   {timestamps: true}
-);artSchema.methods.calculateTotalPrice = function() {
-  this.totalPrice = this.fooditems.reduce((total, Foofitem) => total + Fooditem.price * Fooditem.quantity,0)
-
+);
+CartSchema.methods.calculateTotalPrice = function() {
+  this.totalPrice = this.fooditems.reduce((total, Fooditem) => total + Fooditem.price * Fooditem.quantity,0)
   
 }
 
 const Cart = mongoose.model('Cart', CartSchema);
 
-module.exports = { Cart }
+module.exports = {Cart}

@@ -4,12 +4,12 @@ const { sellerAuth } = require('../../middlewares/sellerAuth')
 const { upload } = require('../../middlewares/multer')
 const router = express.Router()
 
-router.get('/allFooditems', getAllFooditems)
-router.get('/fooditem/fooditem:Id', getFooditem)
+router.get('/all-fooditems', getAllFooditems)
+router.get('/get-fooditem/:fooditemId', getFooditem)
 
 router.post('/add-fooditem',upload.single('thumbnail') ,createFooditem)
 
-router.patch('/update-Fooditem/:fooditemId',sellerAuth, updateFooditem)
-router.delete('/delete-Fooditem/fooditem:Id',sellerAuth, deleteFooditem)
+router.patch('/update-fooditem/:fooditemId',sellerAuth, updateFooditem)
+router.delete('/delete-fooditem/:fooditemId',sellerAuth, deleteFooditem)
 
 module.exports = { fooditemsRoutes: router }

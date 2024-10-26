@@ -1,5 +1,5 @@
-const mongoose  = require("mongoose");
 
+const mongoose = require('mongoose');
 
 const FooditemSchema = new mongoose.Schema({
   title: {
@@ -19,10 +19,11 @@ const FooditemSchema = new mongoose.Schema({
     type: Number,
     required: true 
    },
-   cuisine: {
+   category: {
     type: String,
     required: true,
-    default: 'South Indian'
+    enum: ['starter', 'main course', 'dessert'],
+    default: 'main course'
    },
   
    rating: {
@@ -30,17 +31,18 @@ const FooditemSchema = new mongoose.Schema({
     enum: [1,2,3,4,5],
     default: 0},
 
-    users : [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-     }],
-     restuarants : [{
+    restuarants : [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Restuarant'
      }],
-     categoris : [{
+   cuisines : [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Category'
+      ref: 'Cuisine'
+     }],
+     
+     sellers : [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Seller'
      }],
 
    },

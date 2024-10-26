@@ -134,7 +134,7 @@ const getAllSellers = async (req,res,next) =>{
 const sellerUpdate = async (req,res,next) => {
     try {
 
-        const {sellerId}= req.params;
+        const {sellerId}= req.seller;
         const {name,email, password, phone, profilePic,foodItems, orders, menus} = req.body;
 
 
@@ -157,7 +157,7 @@ const sellerUpdate = async (req,res,next) => {
 }
 const deleteSeller = async (req,res,next) => {
     try {
-       const {sellerId} = req.params;
+       const {sellerId} = req.seller;
        
        const deletedSeller = await Seller.findOneAndDelete({_id: sellerId})
        if(!deletedSeller){
