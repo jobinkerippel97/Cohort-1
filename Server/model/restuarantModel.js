@@ -14,7 +14,7 @@ const RestuarantSchema = new mongoose.Schema({
     street: String,
     city: String,
     postalcode: String,
-    country: String
+    state: String
   },
    
    rating: {

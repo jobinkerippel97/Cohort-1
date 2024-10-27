@@ -16,9 +16,7 @@ const addToCart = async (req,res,next)=> {
 
         // find the users cart or create a new one if its dosent exist
         let cart = await Cart.findOne(userId)
-        console.log(cart, "====cart");
         
- 
         if(!cart){
             cart = new Cart({userId, fooditems: []})
         }
@@ -78,7 +76,7 @@ const getCart = async (req,res,next)=> {
         
         const {userId} = req.user.id
 
-        const cart = await Cart.findOne( userId ).populate('fooditems.fooditemId')
+        const cart = await Cart.findOne( userId ).populate('fooditems.fooditemId').sort({createdAt: -1})
         console.log(cart, "======cart");
         
         if(!cart){

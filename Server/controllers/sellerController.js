@@ -118,9 +118,9 @@ const checkSeller = async (req,res,next) => {
 }
 const getAllSellers = async (req,res,next) =>{
     try {
-        const seller = req.seller
+        const {seller} = req.seller.id
         // const {id}= req.query
-        const sellers = await Seller.find({seller})
+        const sellers = await Seller.find(seller)
         if(!sellers){
             res.status(400).json({message:"Sellers does not fetched", success: false})
         }
@@ -134,11 +134,11 @@ const getAllSellers = async (req,res,next) =>{
 const sellerUpdate = async (req,res,next) => {
     try {
 
-        const {sellerId}= req.seller;
+        const sellerId= req.seller.id;
         const {name,email, password, phone, profilePic,foodItems, orders, menus} = req.body;
 
 
-        const issellerExist = await Seller.findOne({_id: sellerId})
+        const issellerExist = await Seller.findOne({_id: sellerId}, {new:true, upsert: true })
         if(!issellerExist){
             return res.status(400).json({success: false, message: "seller does not exist"})
         }
@@ -157,7 +157,7 @@ const sellerUpdate = async (req,res,next) => {
 }
 const deleteSeller = async (req,res,next) => {
     try {
-       const {sellerId} = req.seller;
+       const sellerId = req.seller.id
        
        const deletedSeller = await Seller.findOneAndDelete({_id: sellerId})
        if(!deletedSeller){

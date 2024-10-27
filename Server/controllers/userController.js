@@ -117,9 +117,9 @@ const checkUser = async (req,res,next) => {
 
 const getAllUsers = async (req,res,next) =>{
     try {
-        const user = req.user
+        const {user} = req.user.id
         // const {id}= req.query
-        const users = await User.find({user})
+        const users = await User.find(user)
         if(!users){
             res.status(400).json({message:"Users is not fetched", success: false})
         }
