@@ -4,8 +4,6 @@ const { Seller } = require("../model/sellerModel")
 
 const createCuisine = async (req,res,next) => {
     try {
-       
-
         const{cuisine} = req.body
         const seller = req.seller
     //  console.log(cuisine, "====cuisine")

@@ -21,7 +21,7 @@ const createRestuarant = async (req,res,next) => {
               
                }  
 
-            const newRestuarant = new Restuarant({thumbnail,restuarantName,address,rating,cuisines,menus,sellers});
+            const newRestuarant = new Restuarant({thumbnail: imageUrl,restuarantName,address,rating,cuisines,menus,sellers});
             // console.log(newRestuarant,"======newResto");
             
 

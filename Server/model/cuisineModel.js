@@ -5,7 +5,7 @@ const CuisineSchema = new mongoose.Schema({
   cuisine: [{
     type: String,
     required: true,
-    default: 'stater'
+    default: 'south indian'
   }]
     
   },

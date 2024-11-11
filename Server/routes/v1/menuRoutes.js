@@ -9,7 +9,7 @@ router.get('/get-menu/:menuId',getMenu)
 router.post('/add-menu',sellerAuth, createMenu)
 
 
-router.patch('update-menu/:menuId',sellerAuth,updatedMenu)
-router.delete('delete-menu/:menuId',sellerAuth,deletedMenu)
+router.patch('/update-menu/:menuId',sellerAuth,updatedMenu)
+router.delete('/delete-menu/:menuId',sellerAuth,deletedMenu)
 
 module.exports = { menuRoutes: router }

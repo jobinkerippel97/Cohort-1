@@ -3,17 +3,12 @@ const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
   
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-    },
-  fooditems: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Fooditem',
-    required: true
+  // fooditems: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Fooditem',
+  //   required: true
    
-  }],
+  // }],
 
   carts: [{
     type: mongoose.Schema.Types.ObjectId,
@@ -23,7 +18,7 @@ const OrderSchema = new mongoose.Schema({
    paymentStatus: {
     type: String,
     required: true,
-    enum: ['pending', 'paid'],
+    enum: ['Pending', 'Paid'],
     default: 'Pending'
    },
    

@@ -4,7 +4,7 @@ const { sellerAuth } = require('../../middlewares/sellerAuth')
 const router = express.Router()
 
 router.get('/all-cuisines', getAllCuisines )
-router.get('/cuisine/:cuisineId', getCuisine)
+router.get('/get-cuisine/:cuisineId', getCuisine)
 
 router.post('/add-cuisine',sellerAuth,createCuisine)
 

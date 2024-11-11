@@ -36,7 +36,7 @@ const getAllMenus = async (req,res,next) => {
     try {
          // const {id} = req.query
      const allMenus = await Menu.find(req.query).populate('restuarants').populate('fooditems')
-     console.log(allMenus, '====allMenus')
+    //  console.log(allMenus, '====allMenus')
 
 if(allMenus.length === 0)
     return res.status(400).json({success: false, message: "No Menu found"})
@@ -54,7 +54,7 @@ const getMenu = async (req,res,next) => {
     try {
 const {menuId} = req.params
        const menu = await Menu.findById({_id: menuId}).populate('restuarants').populate('fooditems').exec()
-       console.log(menu, "====menu")
+    //    console.log(menu, "====menu")
 
        if(!menu){
         return res.status(400).json({success: false, message: "Menu is not fetched properly"})
@@ -74,7 +74,7 @@ const updatedMenu = async (req,res,next) => {
         const {sellerId,restuarantId} = req.body;
 
 
-        const isFooditemExist = await Fooditem.findOne({_id: menuId})
+        const isFooditemExist = await Menu.findOne({_id: menuId})
         if(!isFooditemExist){
             return res.status(400).json({success: false, message: "Fooditems does not exist"})
         }

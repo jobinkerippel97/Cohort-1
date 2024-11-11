@@ -29,9 +29,9 @@ const RestuarantSchema = new mongoose.Schema({
   }],
 
   sellers:[{
-   sellerId:{ type: mongoose.Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'Seller',
-    required: true}
+    required: true
   }],
   cuisines:[{
     type: mongoose.Schema.Types.ObjectId,

@@ -1,14 +1,13 @@
 const express = require('express')
-const { sellerAuth } = require('../../middlewares/sellerAuth')
-const { createOrder, getOrder } = require('../../controllers/orderController')
+const { createOrder, getOrder, getAllOrders, deleteOrder } = require('../../controllers/orderController')
+const { userAuth } = require('../../middlewares/userAuth')
 const router = express.Router()
 
-router.get('/order/:orderId',getOrder)
+router.get('/get-order/:orderId',getOrder)
+router.get('/all-orders',getAllOrders)
 
-router.post('/add-order',sellerAuth,createOrder)
+router.post('/add-order',userAuth, createOrder)
 
-
-router.patch('/update-Order',)
-router.delete('/delete-Order')
+router.delete('/delete-Order/:orderId',userAuth, deleteOrder)
 
 module.exports = { orderRoutes: router }

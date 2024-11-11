@@ -37,12 +37,14 @@ const FooditemSchema = new mongoose.Schema({
      }],
    cuisines : [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Cuisine'
+      ref: 'Cuisine',
+      required: true
      }],
      
      sellers : [{
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Seller'
+      ref: 'Seller',
+      required: true
      }],
 
    },

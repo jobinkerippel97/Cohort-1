@@ -11,7 +11,7 @@ const createFooditem = async (req,res,next) => {
         //console.log(req.file,"=====image in controller")
 
         const{title, thumbnail, description, price,category,cuisines, rating,restuarants,sellers} = req.body
-     
+     console.log(req.body)
         if( !title || !description || !price ){
            return res.status(400).json({success: false, message: "All fields is required"}) }
 
@@ -27,6 +27,8 @@ const createFooditem = async (req,res,next) => {
            }   
             
             const newFooditem = new Fooditem({title,thumbnail: imageUrl,description,price,cuisines,restuarants,rating,sellers,category});
+            console.log(newFooditem,"=====newFooditem");
+            
 
         await newFooditem.save();
         res.json({success: true, message: "Fooditem created successfully!",  data: newFooditem})
@@ -91,7 +93,7 @@ const updateFooditem = async (req,res,next) => {
         return res.status(401).json({message: "seller not authorized"})
        }
 
-      const updatedFooditem = await Fooditem.findOneAndUpdate ({_id: fooditemId}, {title, thumbnail, description, price, rating},{$push: {cuisines:{cuisineId}}},{$push: {sellers:{sellerId}}},{$push: {restuarants:{restuarantId}}}, {new: true}) 
+      const updatedFooditem = await Fooditem.findOneAndUpdate ({_id: fooditemId}, {title, thumbnail, description, price, rating},{$push: {cuisines:{cuisineId}}},{$push: {sellers:{sellerId}}},{$push: {restuarants:{restuarantId}}}, {new: true, upsert: true}) 
         
 
         res.json({success: true, message: "Fooditems updated sucessfully", data: updatedFooditem})
